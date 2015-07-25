@@ -27,7 +27,7 @@
     return [LoginTableViewCell cellId];
 }
 
-+ (LoginTableViewCell*) LoginTableViewCell{
++ (LoginTableViewCell*) LoginTableViewCell {
     NSArray *nibArray = [[NSBundle mainBundle]loadNibNamed:[LoginTableViewCell cellId] owner:nil options:nil];
     return nibArray[0];
 }

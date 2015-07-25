@@ -38,8 +38,7 @@
     LoginTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[LoginTableViewCell cellId]];
     SocialNetwork *socialNetwork = self.arrayWithNetworksObj[indexPath.row];
     
-    if(!cell){
-        
+    if(!cell){        
         cell = [LoginTableViewCell LoginTableViewCell];
     }
     [cell configurationLoginTableViewCell:socialNetwork];

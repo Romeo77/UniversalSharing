@@ -17,9 +17,7 @@
 @end
 static TwitterNetwork *model = nil;
 @implementation TwitterNetwork
-+ (TwitterNetwork*) sharedManager
-{
-    
++ (TwitterNetwork*) sharedManager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         model = [[TwitterNetwork alloc] init];
@@ -29,10 +27,8 @@ static TwitterNetwork *model = nil;
 
 - (instancetype) init {
     self = [super init];
-    
     if (self) {
         self.networkType = Twitter;
-        
         if (![self obtainUserName]) {
             [self initiationPropertiesWithoutSession];
         }
@@ -41,7 +37,6 @@ static TwitterNetwork *model = nil;
             [self obtainArrayUsersTwitter];
         }
     }
-    
     return self;
 }
 
@@ -52,12 +47,10 @@ static TwitterNetwork *model = nil;
 
 - (void) loginWithComplition :(Complition) block {
     self.copyComplition = block;
-    
     ACAccountStore *accountStore = [ACAccountStore new];
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     __weak TwitterNetwork *weakSell = self;
-    
     [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
         if(error)
             NSLog(@"error%@",error);
@@ -65,7 +58,6 @@ static TwitterNetwork *model = nil;
         if(granted) {
             [weakSell obtainArrayUsersTwitter];
         }
-        
     }];
 }
 
@@ -74,6 +66,7 @@ static TwitterNetwork *model = nil;
     ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     self.accountsArray = [accountStore accountsWithAccountType:accountType];
+    [[NSUserDefaults standardUserDefaults] setInteger:[self.accountsArray count] forKey:kTwitterUserCount];
     if ([self.accountsArray count] == 1)
     {
         self.twitterAccount = [self.accountsArray firstObject];
@@ -126,7 +119,7 @@ static TwitterNetwork *model = nil;
 
 - (void) obtainDataFromTwitter {
     __weak TwitterNetwork *weakSell = self;
-    NSMutableDictionary *parametrs = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self obtainUserName], @"screen_name", nil];    
+    NSMutableDictionary *parametrs = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self obtainUserName], @"screen_name", nil];
     SLRequest *followRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodGET URL:[NSURL URLWithString:kRequestUrlTwitter] parameters:parametrs];
     
     [followRequest setAccount:self.twitterAccount];
@@ -158,11 +151,16 @@ static TwitterNetwork *model = nil;
 }
 
 - (void) createUserName {
-   [[NSUserDefaults standardUserDefaults] setObject:self.twitterAccount.username forKey:kTwitterUserName];
+    [[NSUserDefaults standardUserDefaults] setObject:self.twitterAccount.username forKey:kTwitterUserName];
+}
+
+- (void) removeObjectFromUserDefault {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kTwitterUserName];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kTwitterUserCount];
 }
 
 - (void) loginOut {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kTwitterUserName];
+    [self removeObjectFromUserDefault];
     self.currentUser = nil;
     [self initiationPropertiesWithoutSession];
 }

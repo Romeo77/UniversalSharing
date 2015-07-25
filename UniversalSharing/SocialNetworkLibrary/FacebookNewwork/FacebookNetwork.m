@@ -13,8 +13,7 @@
 static FacebookNetwork *model = nil;
 
 @implementation FacebookNetwork
-+ (FacebookNetwork*) sharedManager
-{
++ (FacebookNetwork*) sharedManager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         model = [[FacebookNetwork alloc] init];
@@ -25,7 +24,6 @@ static FacebookNetwork *model = nil;
 - (instancetype) init {
     self = [super init];
     if (self) {
-        
         self.networkType = Facebook;
         if (![FBSDKAccessToken currentAccessToken]) {
             [self initiationPropertiesWithoutSession];
@@ -35,13 +33,11 @@ static FacebookNetwork *model = nil;
             [self obtainDataFromFacebook];
         }
     }
-    
     return self;
 }
 
 - (void) obtainDataFromFacebook {
     __weak FacebookNetwork *weakSell = self;
-    
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]initWithGraphPath:@"/me"
                                                                   parameters:@{@"fields": kRequestParametrsFacebook}
                                                                   HTTPMethod:@"GET"];
@@ -58,8 +54,7 @@ static FacebookNetwork *model = nil;
     }];
 }
 
-- (void) loginWithComplition :(Complition) block {
-    
+- (void) loginWithComplition :(Complition) block {    
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     __weak FacebookNetwork *weakSell = self;
     

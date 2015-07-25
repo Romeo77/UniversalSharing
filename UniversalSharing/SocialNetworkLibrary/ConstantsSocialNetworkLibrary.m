@@ -12,6 +12,7 @@
 NSString *const ALL_USER_FIELDS = @"first_name,last_name,photo_200_orig,id,birthday";
 NSString *const kRequestUrlTwitter = @"https://api.twitter.com/1.1/users/show.json";
 NSString *const kTwitterUserName = @"twitterUserName";
+NSString *const kTwitterUserCount = @"twitterUserCount";
 NSString *const kVkAppID = @"5007530";
 NSString *const kRequestParametrsFacebook = @"name,id,picture,gender,birthday,email,first_name,last_name,location,friends";
 

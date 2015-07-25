@@ -15,12 +15,12 @@
 @end
 @implementation FirstCellOfInfoTableViewCell
 
-+ (NSString*) cellId{
++ (NSString*) cellId {
     
     return NSStringFromClass([FirstCellOfInfoTableViewCell class]);
 }
 
-- (void)awakeFromNib{//one time round pic
+- (void)awakeFromNib {//one time round pic
     [self.userImage roundImageView];
 }
 
@@ -29,7 +29,7 @@
     return [FirstCellOfInfoTableViewCell cellId];
 }
 
-+ (FirstCellOfInfoTableViewCell*) FirstCellOfInfoTableViewCell{
++ (FirstCellOfInfoTableViewCell*) FirstCellOfInfoTableViewCell {
     NSArray *nibArray = [[NSBundle mainBundle]loadNibNamed:[FirstCellOfInfoTableViewCell cellId] owner:nil options:nil];
     return nibArray[0];
 }

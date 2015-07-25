@@ -14,17 +14,17 @@
 @end
 @implementation OtherCellOfInfoTableViewCell
 
-+ (NSString*) cellId{
++ (NSString*) cellId {
     
     return NSStringFromClass([OtherCellOfInfoTableViewCell class]);
 }
 
-+ (OtherCellOfInfoTableViewCell*) OtherCellOfInfoTableViewCell{
++ (OtherCellOfInfoTableViewCell*) OtherCellOfInfoTableViewCell {
     NSArray *nibArray = [[NSBundle mainBundle]loadNibNamed:[OtherCellOfInfoTableViewCell cellId] owner:nil options:nil];
     return nibArray[0];
 }
 
-- (void) configurationLoginTableViewCell :(SocialNetwork*) socialNetwork :(NSIndexPath *)indexPath{
+- (void) configurationLoginTableViewCell :(SocialNetwork*) socialNetwork :(NSIndexPath *)indexPath {
     // or as variant via array!!!
     switch (indexPath.row) {
         case 1:

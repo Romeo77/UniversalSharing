@@ -13,7 +13,6 @@ FOUNDATION_EXPORT NSString *const kFacebookNetworkName;
 FOUNDATION_EXPORT NSString *const kTwitterNetworkName;
 FOUNDATION_EXPORT NSString *const kVkNetworkName;
 FOUNDATION_EXPORT NSString *const kSegueIdentifier;
-
 FOUNDATION_EXPORT NSString *const notificationReloadTableView;
 
 

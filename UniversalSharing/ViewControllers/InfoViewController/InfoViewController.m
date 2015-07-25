@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.contentInset = UIEdgeInsetsMake(64,0,0,0);    
+    self.tableView.contentInset = UIEdgeInsetsMake(64,0,0,0);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -33,7 +33,7 @@
     if (indexPath.row == 0) {
         FirstCellOfInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[FirstCellOfInfoTableViewCell cellId]];
         
-        if(!cell){            
+        if(!cell){
             cell = [FirstCellOfInfoTableViewCell FirstCellOfInfoTableViewCell];
         }
         [cell configurationLoginTableViewCell:self.socialNetwork];
@@ -59,9 +59,9 @@
     }
     return sizeCell;
 }
+
 - (IBAction)logoutBtnTapped:(id)sender {
-    if (self.socialNetwork.networkType == Twitter) {
-        
+    if (self.socialNetwork.networkType == Twitter && [[NSUserDefaults standardUserDefaults]integerForKey:kTwitterUserCount] > 1) {        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Do you want to logout or change account"
                                                         message:@""
                                                        delegate:self
@@ -76,14 +76,13 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self.socialNetwork  loginOut];
     if (!buttonIndex) {
-        [self.socialNetwork  loginOut];
         [self.socialNetwork loginWithComplition:^(id result, NSError *error) {
             [self.tableView reloadData];
         }];
     }
     else {
-        [self.socialNetwork  loginOut];
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationReloadTableView object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }

@@ -16,8 +16,7 @@
 static VKNetwork *model = nil;
 @implementation VKNetwork
 
-+ (VKNetwork*) sharedManager
-{
++ (VKNetwork*) sharedManager {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         model = [[VKNetwork alloc] init];
@@ -30,7 +29,6 @@ static VKNetwork *model = nil;
     [VKSdk initializeWithDelegate:self andAppId:kVkAppID];
     
     if (self) {
-        
         self.networkType = VKontakt;
         if (![VKSdk wakeUpSession]) {
             [self initiationPropertiesWithoutSession];
@@ -38,10 +36,8 @@ static VKNetwork *model = nil;
         else {
             self.isLogin = YES;
             [self obtainDataFromVK];
-            
         }
     }
-    
     return self;
 }
 
@@ -68,7 +64,6 @@ static VKNetwork *model = nil;
     self.title = @"Login VKontakt";
     self.icon = @"VKimage.png";
     self.isLogin = NO;
-    
 }
 
 - (void) obtainDataFromVK
@@ -95,8 +90,7 @@ static VKNetwork *model = nil;
      }];
 }
 
-- (UIViewController*) vcForLoginVK {
-    
+- (UIViewController*) vcForLoginVK {    
     UIWindow *window=[UIApplication sharedApplication].keyWindow;
     UIViewController *vc=[window rootViewController];
     if(vc.presentedViewController)

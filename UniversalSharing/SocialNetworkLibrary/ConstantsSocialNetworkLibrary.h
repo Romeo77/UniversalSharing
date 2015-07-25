@@ -20,8 +20,8 @@ typedef NS_ENUM (NSInteger, NetworkType) {
 FOUNDATION_EXPORT NSString *const ALL_USER_FIELDS;
 FOUNDATION_EXPORT NSString *const kVkAppID;
 FOUNDATION_EXPORT NSString *const kRequestParametrsFacebook;
-
 FOUNDATION_EXPORT NSString *const kTwitterUserName;
+FOUNDATION_EXPORT NSString *const kTwitterUserCount;
 FOUNDATION_EXPORT NSString *const kRequestUrlTwitter;
 
 @end
